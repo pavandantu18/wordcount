@@ -8,7 +8,7 @@ S3_OUTPUT = 's3a://pavandbucket/output_folder/'
 
 spark = SparkSession.builder \
     .appName("WordCount") \
-    .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.11.901") \
+    .config("spark.jars", "/home/ec2-user/jars/hadoop-aws-3.3.1.jar,/home/ec2-user/jars/aws-java-sdk-bundle-1.11.901.jar") \
     .getOrCreate()
 
 hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
