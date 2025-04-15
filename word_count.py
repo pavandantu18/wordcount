@@ -6,9 +6,9 @@ AWS_SECRET_ACCESS_KEY = 'jTidc+QJMz022c2KNI5eoOGi9RonDAGB0cCf+ty4'
 
 # S3 paths
 
-S3_INPUT = 's3://pavanwordcountbucket/input.txt'
+S3_INPUT = 's3a://pavanwordcountbucket/input.txt'
 
-S3_OUTPUT = 's3://pavanwordcountbucket/output_folder/'
+S3_OUTPUT = 's3a://pavanwordcountbucket/output_folder/'
 
 # Spark Session
 spark = SparkSession.builder \
@@ -18,8 +18,8 @@ spark = SparkSession.builder \
 
 # Hadoop S3 Configuration
 hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
-hadoop_conf.set("fs.s3.access.key", AWS_ACCESS_KEY_ID)
-hadoop_conf.set("fs.s3.secret.key", AWS_SECRET_ACCESS_KEY)
+hadoop_conf.set("fs.s3a.access.key", AWS_ACCESS_KEY_ID)
+hadoop_conf.set("fs.s3a.secret.key", AWS_SECRET_ACCESS_KEY)
 
 # Word Count Logic
 text_file = spark.sparkContext.textFile(S3_INPUT)
