@@ -5,10 +5,8 @@ AWS_ACCESS_KEY_ID = 'AKIAQQABDEF7X3T3MMHC'
 AWS_SECRET_ACCESS_KEY = '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'
 
 # S3 paths
-
-S3_INPUT = 's3a://pavanwordcountbucket/input.txt'
-
-S3_OUTPUT = 's3a://pavanwordcountbucket/output_folder/'
+S3_INPUT = 's3a://pavandbucket/input_file.txt'
+S3_OUTPUT = 's3a://pavandbucket/output_folder/'
 
 # Spark Session
 spark = SparkSession.builder \
