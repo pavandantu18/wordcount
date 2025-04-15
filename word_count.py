@@ -6,21 +6,21 @@ AWS_SECRET_ACCESS_KEY = 'jTidc+QJMz022c2KNI5eoOGi9RonDAGB0cCf+ty4'
 S3_INPUT = 's3a://pavandbucket/input.txt'
 S3_OUTPUT = 's3a://pavandbucket/output_folder/'
 
+# Spark Session
 spark = SparkSession.builder \
     .appName("WordCount") \
-    .config("spark.jars", "/home/ec2-user/jars/hadoop-aws-3.3.1.jar,/home/ec2-user/jars/aws-java-sdk-bundle-1.11.901.jar") \
+    .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.11.901") \
     .getOrCreate()
 
+# Hadoop S3 Configuration
 hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
 hadoop_conf.set("fs.s3a.access.key", AWS_ACCESS_KEY_ID)
 hadoop_conf.set("fs.s3a.secret.key", AWS_SECRET_ACCESS_KEY)
-hadoop_conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
-hadoop_conf.set("fs.s3a.endpoint", "s3.amazonaws.com")
 
+# Word Count Logic
 text_file = spark.sparkContext.textFile(S3_INPUT)
 counts = text_file.flatMap(lambda line: line.split()) \
                   .map(lambda word: (word, 1)) \
                   .reduceByKey(lambda a, b: a + b)
 counts.saveAsTextFile(S3_OUTPUT)
-
 spark.stop()
