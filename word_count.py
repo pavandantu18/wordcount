@@ -1,8 +1,7 @@
 from pyspark.sql import SparkSession
 
-AWS_ACCESS_KEY_ID = 'AKIAQQABDEF7X3T3MMHC'
-AWS_SECRET_ACCESS_KEY = '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'
-
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 S3_INPUT = 's3a://pavandbucket/input.txt'
 S3_OUTPUT = 's3a://pavandbucket/output_folder/'
 
